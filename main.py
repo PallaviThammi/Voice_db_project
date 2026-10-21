@@ -1,4 +1,5 @@
 from db_functions import delete_student, list_students
+from voice import listen
 
 def show_remaining():
     students = list_students()
@@ -23,7 +24,9 @@ def handle_command(text):
         print("Sorry, I only understand 'delete <name>' or 'list'.")
 
 while True:
-    command = input("Command (or 'quit'): ")
-    if command == "quit":
+    choice = input("Press Enter to speak, or type a command (quit to exit): ")
+    if choice == "quit":
         break
-    handle_command(command)
+    command = listen() if choice == "" else choice
+    if command:
+        handle_command(command)
